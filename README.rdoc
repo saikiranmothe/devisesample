@@ -1,0 +1,71 @@
+How to install devise 
+##################
+
+-->   
+
+	  rails new application
+	  cd application
+	  rm -rf public/index.html
+	  gedit Gemfile
+  
+
+###################
+
+Add Devise Gem to Gemfile
+---------------------------
+	gem 'devise'
+	gem ''therubyracer'  ### uncomment it --
+
+###################
+  
+	bundle install 
+
+###################
+
+	rails g devise:install 
+
+        rails g devise user
+
+        rake db:migrate
+
+###################
+			rails g controller welcome index 
+##################
+
+  add in --  config/routes.rb  
+
+root :to => 'welcome#index'
+#####################
+
+Add sign_in and sign_up links to Layout
+##########################
+
+  https://github.com/plataformatec/devise/wiki/How-To:-Add-sign_in,-sign_out,-and-sign_up-links-to-your-layout-template
+$$$$$$$$$$$$$$$$$$$$$$$$
+
+Add in app/views/welcome/index.html.erb
+####################################
+
+
+	   <% if user_signed_in? %>
+	  <li>
+	  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+	  </li>
+	<% else %>
+	  <li>
+	  <%= link_to('Login', new_user_session_path)  %>  
+	  </li>
+	<% end %>
+
+	<% if user_signed_in? %>
+	  <li>
+	  <%= link_to('Edit registration', edit_user_registration_path) %>
+	  </li>
+	<% else %>
+	  <li>
+	  <%= link_to('Register', new_user_registration_path)  %>
+	  </li>
+	<% end %>
+
+
+######################################
